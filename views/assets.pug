@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1 Assets
+    form(method="post", action="/assets")
+        .form-group
+            label(for="serialNumber") Serial Number
+            input.form-control(type="text", id="serialNumber", name="serialNumber", required)
+        .form-group
+            label(for="name") Name
+            input.form-control(type="text", id="name", name="name", required)
+        .form-group
+            label(for="categoryId") Category
+            select.form-control(id="categoryId", name="categoryId", required)
+                each category in categories
+                    option(value=category.id)= category.name
+        button.btn.btn-primary(type="submit") Add Asset
+    table.table
+        thead
+            tr
+                th ID
+                th Serial Number
+                th Name
+                th Category
+                th Status
+        tbody
+            each asset in assets
+                tr
+                    td= asset.id
+                    td= asset.serialNumber
+                    td= asset.name
+                    td= asset.AssetCategory.name
+                    td= asset.status
